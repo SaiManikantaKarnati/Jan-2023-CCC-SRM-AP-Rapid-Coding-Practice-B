@@ -1,0 +1,5 @@
+I M01 - Lex Characters Unique
+
+str = sorted(list(set(input())))
+for i in str:
+    print(i,end="")
