@@ -1,0 +1,80 @@
+O 06 - ZZ Linked Lists-Deletion at Any Position
+
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct node{
+    int data;
+    struct node* next;
+}Node;
+
+Node* InsertAtEnd(Node *head, int val)
+{
+    Node *newnode = (Node*)malloc(sizeof(Node));
+    newnode->data = val;
+    newnode->next = NULL;
+    if(head == NULL)
+        return newnode;
+    Node *temp = head;
+    while(temp->next)
+    {
+        temp = temp -> next;
+    }
+    temp -> next = newnode;
+    return head;
+    
+}
+
+Node* DeleteAtPos(Node *head, int pos)
+{
+    if(head == NULL)
+        return head;
+    Node *temp = head;
+    if(pos == 0)
+    {
+        head = head -> next;
+        free(temp);  
+        return head;
+    }    
+    while(--pos && temp)
+    {
+        temp = temp -> next;
+    }
+    if(pos==0 && temp->next)
+    {
+        Node *d = temp -> next;
+        temp -> next = d -> next;
+        free(d);
+    }
+    return head;
+        
+}
+void printList(Node* head)
+{
+    if(head)
+    {
+        while(head->next != NULL)
+        {
+            printf("%d->", head -> data);
+            head = head -> next;
+        }
+        printf("%d", head -> data);
+    }
+}
+int main() 
+{
+    int n,val,i,k;
+    scanf("%d", &n);
+    Node* head = NULL;
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&val);
+        head = InsertAtEnd(head, val);
+    }
+    scanf("%d",&k);
+    head = DeleteAtPos(head, k);
+    printList(head);
+    return 0;
+}
