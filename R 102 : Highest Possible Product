@@ -1,0 +1,8 @@
+R 102 : Highest Possible Product
+
+n = int(input())
+arr = sorted(list(map(int,input().split())))
+
+a = arr[0] * arr[1] * arr[n-1]
+b = arr[n-1] * arr[n-2] * arr[n-3]
+print(max(a,b))
