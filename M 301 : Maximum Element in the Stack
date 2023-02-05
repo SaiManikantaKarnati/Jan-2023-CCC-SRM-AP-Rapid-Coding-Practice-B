@@ -1,0 +1,50 @@
+M 301 : Maximum Element in the Stack
+
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int stack[1000000];
+int top=-1,max=0;
+
+void push()
+{
+    int item;
+    scanf("%d",&item);
+    top = top + 1;
+    stack[top] = item;
+    if(max < stack[top])
+        max = stack[top];
+}
+
+void pop()
+{
+    int i;
+    if(max == stack[top])
+        max = 0;
+    top = top - 1;
+    for(i=top;i>=0;i--)
+        if(max < stack[i])
+            max = stack[i];
+}
+
+int main() {
+    int n,choice;
+    scanf("%d",&n);
+    while(n--)
+    {
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1: push();
+                    break;
+            case 2: pop();
+                    break;
+            case 3: printf("%d\n",max);
+                    break;
+        }
+    }
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    return 0;
+}
