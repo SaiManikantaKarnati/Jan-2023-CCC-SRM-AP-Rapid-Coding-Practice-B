@@ -1,0 +1,63 @@
+R 305 - Height of a Binary Search Tree
+
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct node{
+    struct node* left;
+    struct node* right;
+    int data;
+}TreeNode;
+
+
+TreeNode* creation(int data)
+{
+    TreeNode* newnode = (TreeNode*)malloc(sizeof(TreeNode));
+    newnode -> data = data;
+    newnode -> left = NULL;
+    newnode -> right = NULL;
+    return newnode;
+}
+
+TreeNode* insertion(TreeNode* root, int val)
+{
+    if(root == NULL)
+        return creation(val);
+    if(val <= root->data)
+        root -> left = insertion(root->left, val);
+    if(val > root->data)
+        root -> right = insertion(root->right, val);
+    return root;
+}
+
+
+int height(TreeNode* root)
+{
+    int l,r;
+    if(root == NULL)
+        return -1;
+    if(root->left == NULL && root->right == NULL)
+        return 0;
+    l = height(root -> left);
+    r = height(root -> right);
+    int maximum = l>r?l:r;
+    return maximum+1;
+}
+int main()
+{
+    TreeNode* root = NULL;
+    int n,i,val;
+    scanf("%d",&n);
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&val);
+        root = insertion(root, val);
+    }
+    printf("%d",height(root)+1);
+    
+        
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    return 0;
+}
