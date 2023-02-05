@@ -1,0 +1,66 @@
+M 501 : Infix to Postfix
+
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+char stack[1000];
+int top=-1;
+
+int precedence(char x)
+{
+    if(x == '(')
+        return 0;
+    if(x == '+' || x == '-')
+        return 1;
+    if(x == '*' || x == '/')
+        return 2;
+    return 0;
+}
+
+
+void push(char x)
+{
+    top = top + 1;
+    stack[top] = x;
+}
+
+char pop()
+{
+    if(top == -1)
+        return -1;
+    else
+        return stack[top--];
+}
+
+int main() {
+    char str[50],x;
+    scanf("%s", str);
+    char *s = str;
+    while(*s != '\0')
+    {
+        if(isalnum(*s))
+            printf("%c",*s);
+        else if(*s == '(')
+            push(*s);
+        else if(*s == ')')
+        {
+            while((x = pop()) != '(')
+                printf("%c",x);
+        }
+        else
+        {
+            while(precedence(*s) <= precedence(stack[top]))
+            {
+                printf("%c",pop());
+            }
+            push(*s);
+        }
+        s = s + 1;
+    }
+    while(top != -1)
+        printf("%c",pop());
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    return 0;
+}
