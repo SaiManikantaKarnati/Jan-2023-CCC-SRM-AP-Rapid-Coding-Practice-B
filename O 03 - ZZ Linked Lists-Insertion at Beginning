@@ -1,0 +1,44 @@
+O 03 - ZZ Linked Lists-Insertion at Beginning
+
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct node{
+    int data;
+    struct node* next;
+}Node;
+
+Node* InsertBeginning(Node *head, int val)
+{
+    Node *newnode = (Node*)malloc(sizeof(Node));
+    newnode->data = val;
+    newnode->next = head;
+    return newnode;
+}
+
+void printList(Node* head)
+{
+    if(head->next != NULL)
+    {
+        printf("%d->", head->data);
+        printList(head->next);
+    }
+    else
+        printf("%d",head->data);
+    
+}
+int main() 
+{
+    int n,val,i;
+    scanf("%d", &n);
+    Node* head = NULL;
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&val);
+        head = InsertBeginning(head, val);
+    }
+    printList(head);
+    return 0;
+}
