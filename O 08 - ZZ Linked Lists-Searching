@@ -1,0 +1,54 @@
+O 08 - ZZ Linked Lists-Searching
+
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct node{
+    int data;
+    struct node* next;
+}Node;
+
+Node* InsertAtEnd(Node *head, int val)
+{
+    Node *newnode = (Node*)malloc(sizeof(Node));
+    newnode->data = val;
+    newnode->next = NULL;
+    if(head == NULL)
+        return newnode;
+    Node *temp = head;
+    while(temp->next)
+    {
+        temp = temp -> next;
+    }
+    temp -> next = newnode;
+    return head;
+    
+}
+
+
+int main() {
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */ 
+    int n,val,i,key;
+    scanf("%d", &n);
+    Node* head = NULL;
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&val);
+        head = InsertAtEnd(head, val);
+    }
+    scanf("%d", &key);
+    while(head)
+    {
+        if(head -> data == key)
+        {
+            printf("yes");
+            return 0;
+        }
+        head = head -> next;    
+    }
+    printf("no");
+    return 0;
+}
