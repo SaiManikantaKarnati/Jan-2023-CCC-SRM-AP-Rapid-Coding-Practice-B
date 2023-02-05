@@ -1,0 +1,13 @@
+Q 802 - Inorder Traversal Restoration
+
+def conversion(postorder):
+    length = len(postorder)
+    if length == 1:
+        return postorder
+    left = postorder[:length//2]
+    root = postorder[length - 1]
+    right = postorder[length//2 : length-1]
+    return conversion(left) + root + conversion(right)
+    
+postorder = input()
+print(conversion(postorder))
