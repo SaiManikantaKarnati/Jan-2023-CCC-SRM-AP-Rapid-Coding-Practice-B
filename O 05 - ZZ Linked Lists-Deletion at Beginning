@@ -1,0 +1,67 @@
+O 05 - ZZ Linked Lists-Deletion at Beginning
+
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct node{
+    int data;
+    struct node* next;
+}Node;
+
+Node* DeleteBegin(Node *head)
+{
+    if(head==NULL)
+        return head;
+    Node* temp = head;
+    head = head->next;
+    free(temp);
+    return head;
+}
+
+Node* InsertEnd(Node *head, int val)
+{
+    
+    Node *newnode = (Node*)malloc(sizeof(Node));
+    newnode->data = val;
+    newnode->next = NULL;
+    if(head == NULL)
+        return newnode;
+    Node* temp = head;
+    while(temp->next != NULL)
+        temp = temp -> next;
+    temp -> next = newnode;
+    return head;
+}
+
+void printList(Node* head)
+{
+    
+    if(head)
+    {
+        while(head->next != NULL)
+        {
+            printf("%d->",head->data);
+            head = head->next;
+        }
+        printf("%d",head->data);
+    }
+}
+    
+int main() 
+{
+    int n,val,i,k;
+    scanf("%d", &n);
+    Node* head = NULL;
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&val);
+        head = InsertEnd(head,val);
+    }
+    scanf("%d",&k);
+    for(i=0;i<k;i++)
+        head = DeleteBegin(head);
+    printList(head);
+    return 0;
+}
