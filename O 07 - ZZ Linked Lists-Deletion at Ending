@@ -1,0 +1,103 @@
+O 07 - ZZ Linked Lists-Deletion at Ending
+
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct node{
+    int data;
+    struct node* next;
+}Node;
+
+Node* InsertAtEnd(Node *head, int val)
+{
+    Node *newnode = (Node*)malloc(sizeof(Node));
+    newnode->data = val;
+    newnode->next = NULL;
+    if(head == NULL)
+        return newnode;
+    Node *temp = head;
+    while(temp->next)
+    {
+        temp = temp -> next;
+    }
+    temp -> next = newnode;
+    return head;
+    
+}
+
+Node* DeleteAtEnd(Node *head, int k)
+{
+    if(head == NULL)
+        return head;
+    int n=0;
+    Node *temp = head;
+    while(temp)
+    {
+        n++;
+        temp = temp -> next;
+    }
+    if(n<=k)
+    {
+        while(head)
+        {
+            temp = head;
+            head = head -> next;
+            free(temp);
+        }
+    }
+    else
+    {
+        temp = head;
+        int p = n-k;
+        while(--p)
+            temp = temp -> next;
+        Node *t = temp -> next;
+        temp -> next = NULL;
+        while(t)
+        {
+            if(t->next)
+            {
+                temp = t -> next;
+                free(t);
+                t = temp;
+            }
+            else
+            {
+                free(t);
+                break;
+            }
+        }
+        
+    }
+    return head;
+        
+}
+void printList(Node* head)
+{
+    if(head)
+    {
+        while(head->next != NULL)
+        {
+            printf("%d->", head -> data);
+            head = head -> next;
+        }
+        printf("%d", head -> data);
+    }
+}
+int main() 
+{
+    int n,val,i,k;
+    scanf("%d", &n);
+    Node* head = NULL;
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&val);
+        head = InsertAtEnd(head, val);
+    }
+    scanf("%d",&k);
+    head = DeleteAtEnd(head, k);
+    printList(head);
+    return 0;
+}
