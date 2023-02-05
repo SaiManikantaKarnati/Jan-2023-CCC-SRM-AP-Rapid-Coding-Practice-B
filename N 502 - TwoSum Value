@@ -1,0 +1,46 @@
+N 502 - TwoSum Value
+
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int cmp(const void* a, const void* b)
+{
+    return *(int*)a - *(int*)b;
+}
+
+int binarysearch(int array[],int low,int high,int value)
+{
+    while(low <= high)
+    {
+        int mid = low + (high-low)/2;
+        if(array[mid] == value)
+            return 1;
+        if(array[mid] < value)
+            low = mid + 1;
+        else
+            high = mid - 1;
+    }
+    return 0;
+}
+
+int main() {
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    int n,i,k,count=0;
+    scanf("%d",&n);
+    int arr[n];
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&arr[i]);
+    }
+    scanf("%d",&k);
+    qsort(arr,n,sizeof(int),cmp);
+    for(i=0;i<n;i++)
+        if(binarysearch(arr,0,n-1,k-arr[i]))
+           count++; 
+    printf("%d",count);
+    return 0;
+    
+}
