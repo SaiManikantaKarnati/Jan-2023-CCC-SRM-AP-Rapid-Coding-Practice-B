@@ -1,0 +1,27 @@
+P 501 - Orange Partitioning
+
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+    int n,arr[100],temp,k=0,i;
+    scanf("%d",&n);
+    for(i=0;i<n;i++)
+        scanf("%d",&arr[i]);
+    for(i=0;i<n;i++)
+    {
+        if(arr[i] <= arr[n-1])
+        {
+            temp = arr[i];
+            arr[i] = arr[k];
+            arr[k] = temp;
+            k = k + 1;
+        }
+    }
+    for(i=0;i<n;i++)
+        printf("%d ", arr[i]);
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    return 0;
+}
