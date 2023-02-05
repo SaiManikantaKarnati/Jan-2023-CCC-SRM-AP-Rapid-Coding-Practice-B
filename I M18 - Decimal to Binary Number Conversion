@@ -1,0 +1,9 @@
+I M18 - Decimal to Binary Number Conversion
+
+def conversion(num):
+    if num>1:
+        conversion(num // 2)
+    print(num%2,end="")
+
+num = int(input())
+conversion(num)
