@@ -1,0 +1,36 @@
+02x22 - 7 Divisible Pairs
+
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+    int n ,i;
+    scanf("%d",&n);
+    int arr[n], k=7, sum=0, remainder[k];
+    for(i=0;i<n;i++) //input array
+    {
+        scanf("%d",&arr[i]);
+    }    
+    
+    for(i=0;i<k;i++)// remainder array initializing all 0'2
+    {
+        remainder[i] = 0;
+    }    
+    
+    for(i=0;i<n;i++) // adding remainder of every number where remainder is index number
+    {
+        remainder[arr[i]%k] = remainder[arr[i]%k] + 1;
+    }    
+    
+    sum = sum + (remainder[0]) * (remainder[0]-1)/2; // in rem array, 0th index numbers are divisible by k
+    
+    for(i=1;i<=3;i++)   //counting of pairs
+    {
+        sum = sum + remainder[i]*remainder[k-i];
+    }    
+    
+    printf("%d",sum);
+    return 0;
+}
