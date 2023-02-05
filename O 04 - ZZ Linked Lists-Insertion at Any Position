@@ -1,0 +1,62 @@
+O 04 - ZZ Linked Lists-Insertion at Any Position
+
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct node{
+    int data;
+    struct node* next;
+}Node;
+
+Node* InsertBeginning(Node *head, int val)
+{
+    Node *newnode = (Node*)malloc(sizeof(Node));
+    newnode->data = val;
+    newnode->next = head;
+    return newnode;
+}
+
+Node* InsertAtPos(Node *head, int pos, int val)
+{
+    if(pos==0)
+        return InsertBeginning(head, val);
+    Node *newnode = (Node*)malloc(sizeof(Node));
+    newnode->data = val;
+    newnode->next = head;
+    Node *temp = head;
+    while(--pos)
+    {
+        temp = temp -> next;
+    }
+    newnode -> next = temp -> next;
+    temp -> next = newnode;
+    return head;
+    
+}
+
+void printList(Node* head)
+{
+    if(head->next != NULL)
+    {
+        printf("%d->", head->data);
+        printList(head->next);
+    }
+    else
+        printf("%d",head->data);
+    
+}
+int main() 
+{
+    int n,val,pos,i;
+    scanf("%d", &n);
+    Node* head = NULL;
+    for(i=0;i<n;i++)
+    {
+        scanf("%d %d",&pos,&val);
+        head = InsertAtPos(head, pos, val);
+    }
+    printList(head);
+    return 0;
+}
